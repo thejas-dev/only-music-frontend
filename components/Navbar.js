@@ -1,6 +1,6 @@
 import {useRecoilState} from 'recoil'
 import {useEffect} from 'react';
-import {currentUserState} from '../atoms/userAtom'
+import {currentUserState,doctorLoginState} from '../atoms/userAtom'
 import {useRouter} from 'next/router';
 import axios from 'axios';
 
@@ -8,27 +8,29 @@ import axios from 'axios';
 export default function Navbar() {
 	// body...
 	const [currentUser,setCurrentUser] = useRecoilState(currentUserState);
+	const [doctorLogin2,setDoctorLogin2] = useRecoilState(doctorLoginState);
 	const router = useRouter();
 
 	useEffect(()=>{
 		const fetch = async() => {
 			if(localStorage.getItem('only-music') || localStorage.getItem('only-music-doctor')){
 				// if(localStorage.getItem('only-music')){
-
-				const loginRoute = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`;
-				const username = localStorage.getItem('only-music')
-				const {data} = await axios.post(loginRoute,{username:username});
-				if(data.status === false){
-					if(localStorage.getItem('only-music-doctor')){
-						if(!currentUser){
+				if(!doctorLogin2){
+					const loginRoute = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`;
+					const username = localStorage.getItem('only-music')
+					const {data} = await axios.post(loginRoute,{username:username});
+					if(data.status === false){
+						if(localStorage.getItem('only-music-doctor')){
+							if(!currentUser){
+								router.push('/signIn')
+							}
+						}else{
 							router.push('/signIn')
 						}
 					}else{
-						router.push('/signIn')
-					}
-				}else{
-					setCurrentUser(data.user)
-				}					
+						setCurrentUser(data.user)
+					}				
+				}
 				// }else{
 				// 	const loginRoute = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/doctorLogin`;
 				// 	const {username,password} = JSON.parse(localStorage.getItem('only-music-doctor'));
