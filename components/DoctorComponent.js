@@ -65,11 +65,9 @@ export default function DoctorComponent() {
 		const allPatientsRoute = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/getAll`;
 
 		const {data} = await axios.get(allPatientsRoute)
-		console.log(data);
 		setAllPatients(data.data.reverse())
 	}
 
-	console.log(allPatients)
 	const toastOption={
 		position: "bottom-right",
 		autoClose: 5000,
