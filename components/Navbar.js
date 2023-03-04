@@ -16,6 +16,7 @@ export default function Navbar() {
 			if(localStorage.getItem('only-music') || localStorage.getItem('only-music-doctor')){
 				// if(localStorage.getItem('only-music')){
 				if(!doctorLogin2){
+					console.log(' iran')
 					const loginRoute = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/auth/login`;
 					const username = localStorage.getItem('only-music')
 					const {data} = await axios.post(loginRoute,{username:username});
