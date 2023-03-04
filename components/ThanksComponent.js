@@ -46,7 +46,7 @@ export default function ThanksComponent() {
 
 			<div className=" border-[2px] border-gray-400/20 shadow-xl rounded-xl px-5 py-3 flex flex-col items-center gap-4">
 				<h1 className="text-2xl text-gray-900 font-semibold">
-					Thank you <span className="text-sky-500">{currentUser.username}</span> for Purchasing the {disease} Therapy Music
+					Thank you <span className="text-sky-500">{currentUser.username}</span> for Purchasing the {disease} Music Therapy
 				</h1>
 				<h1 className="text-gray-400 font-semibold md:text-lg text-md">
 					More details will be sent to the provided number
